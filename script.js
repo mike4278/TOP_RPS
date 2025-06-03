@@ -2,17 +2,11 @@ const weapons = ["Rock", "Paper", "Scissors"];
 let playerScore = 0;
 let computerScore = 0;
 
+let gameOver = false;
+
 function getComputerChoice() {
   const randomNumber = Math.floor(Math.random() * 3);
   return weapons[randomNumber];
-}
-
-function getPlayerChoice() {
-  const userChoice = prompt("Enter 'Rock', 'Paper', or 'Scissors'");
-  let corrected = userChoice.trim().toLowerCase();
-  corrected = corrected.charAt(0).toUpperCase() + corrected.slice(1);
-  //   console.log(corrected);
-  return corrected;
 }
 
 function determineWinner(player, computer) {
@@ -42,18 +36,37 @@ function incrementScore(winner) {
 function displayScore(playerScore, computerScore) {
   console.log("The computer has a score of: " + parseInt(computerScore));
   console.log("The player has a score of: " + parseInt(playerScore));
+
+  const playerScoreValue = document.querySelector("#player-score");
+  const computerScoreValue = document.querySelector("#computer-score");
+  playerScoreValue.innerText = parseInt(playerScore);
+  computerScoreValue.innerText = parseInt(computerScore);
 }
 
 function playRound(player) {
-  // const playerChoice = getPlayerChoice();
+  if (gameOver) return;
+
   const playerChoice = player;
   const computerChoice = getComputerChoice();
+
+  const reportResults = document.querySelector("#report");
+
   console.log("The player chose: " + playerChoice);
   console.log("The computer chose: " + computerChoice);
+
   const winner = determineWinner(playerChoice, computerChoice);
   console.log("The winner: " + winner);
+
+  reportResults.innerText = `The player chose ${playerChoice},\nThe computer chose ${computerChoice}.\n\nRound winner: ${winner}!`;
+
   incrementScore(winner);
   displayScore(playerScore, computerScore);
+
+  if (playerScore >= 5 || computerScore >= 5) {
+    announceGameWinner(playerScore, computerScore);
+    playAgain();
+    gameOver = true;
+  }
 }
 
 function resetScores() {
@@ -71,20 +84,61 @@ function announceWinner() {
   }
 }
 
+function setupButtons() {
+  document
+    .querySelector("#rock")
+    .addEventListener("click", () => playRound("Rock"));
+  document
+    .querySelector("#paper")
+    .addEventListener("click", () => playRound("Paper"));
+  document
+    .querySelector("#scissors")
+    .addEventListener("click", () => playRound("Scissors"));
+}
+
 function playGame() {
+  gameOver = false;
   resetScores();
-  for (i = 0; i < 5; i++) {
-    playRound();
+  displayScore(playerScore, computerScore);
+
+  // Clear winner and result texts
+  document.querySelector("#winner").innerText = "";
+  document.querySelector("#report").innerText = "";
+  document.querySelector("#selection-text").innerText = "Make a selection";
+
+  // Remove existing "Play Again" button if it exists
+  const oldButton = document.querySelector("#play-again");
+  if (oldButton) {
+    oldButton.remove();
   }
+
   announceWinner();
 }
 
-//playGame();
+function announceGameWinner(player, computer) {
+  let gameWinner;
+  if (player >= 5) {
+    gameWinner = "Player";
+  } else if (computer >= 5) {
+    gameWinner = "Computer";
+  }
+  const winnerSpace = document.querySelector("#winner");
+  winnerSpace.innerText = `WINNER: ${gameWinner}!`;
+}
 
-const rockButton = document.querySelector("#rock");
-const paperButton = document.querySelector("#paper");
-const scissorsButton = document.querySelector("#scissors");
+function playAgain() {
+  // Don't add if already exists
+  if (document.querySelector("#play-again")) return;
 
-rockButton.addEventListener("click", () => {
-  playRound("rock");
-});
+  const playAgainButton = document.createElement("button");
+  playAgainButton.id = "play-again"; // for targeting/removal
+  playAgainButton.innerText = "Press to Play Again";
+
+  playAgainButton.addEventListener("click", playGame);
+
+  const announceArea = document.querySelector(".announce");
+  announceArea.appendChild(playAgainButton);
+}
+
+setupButtons();
+playGame();
