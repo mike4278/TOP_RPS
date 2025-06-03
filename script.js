@@ -44,8 +44,9 @@ function displayScore(playerScore, computerScore) {
   console.log("The player has a score of: " + parseInt(playerScore));
 }
 
-function playRound() {
-  const playerChoice = getPlayerChoice();
+function playRound(player) {
+  // const playerChoice = getPlayerChoice();
+  const playerChoice = player;
   const computerChoice = getComputerChoice();
   console.log("The player chose: " + playerChoice);
   console.log("The computer chose: " + computerChoice);
@@ -78,4 +79,12 @@ function playGame() {
   announceWinner();
 }
 
-playGame();
+//playGame();
+
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
+
+rockButton.addEventListener("click", () => {
+  playRound("rock");
+});
