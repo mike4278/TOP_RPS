@@ -104,7 +104,7 @@ function playGame() {
   // Clear winner and result texts
   document.querySelector("#winner").innerText = "";
   document.querySelector("#report").innerText = "";
-  document.querySelector("#selection-text").innerText = "Make a selection";
+  document.querySelector("#selection-text").innerText = "Make a selection.";
 
   // Remove existing "Play Again" button if it exists
   const oldButton = document.querySelector("#play-again");
