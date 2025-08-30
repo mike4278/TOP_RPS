@@ -4,27 +4,63 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
-    <!-- <link rel="stylesheet" href="style.css" /> -->
-    <!-- Updated CSS -->
-    <link rel="stylesheet" href="RPS.css" />
   </head>
   <body>
-    <div class="main">
-      <div class="scores">
-        <h1>Player: <span id="player-score">0</span></h1>
-        <h1>Computer: <span id="computer-score">0</span></h1>
-      </div>
-      <div class="announce">
-        <h1 id="winner"></h1>
-        <p id="report"></p>
-        <p id="selection-text">Make a selection.</p>
-      </div>
-      <div class="buttons">
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
-      </div>
+    <div class="page-container">
+      <header class="head">
+        <nav class="nav">
+          <ul class="links">
+            <li><a href="https://mikenstudio.github.io/index.html">Home</a></li>
+            <li>
+              <a href="https://mikenstudio.github.io/about.html">About</a>
+            </li>
+            <li>
+              <a
+                href="https://mikenstudio.github.io/projects.html"
+                class="active"
+                >Projects</a
+              >
+            </li>
+            <li>
+              <a href="https://mikenstudio.github.io/contact.html">Contact</a>
+            </li>
+            <!-- <li><a href="./index.html">Toggle Theme</a></li> -->
+          </ul>
+        </nav>
+      </header>
+
+      <main class="home-content">
+        <div class="logo-block">
+          <p class="logo">miken <span class="studio">studio</span></p>
+        </div>
+        <section class="page-content center-content">
+          <h1>Rock Paper Scissors</h1>
+
+          <div class="scores">
+            <h2>Player: <span id="player-score">0</span></h2>
+            <h2>Computer: <span id="computer-score">0</span></h2>
+          </div>
+
+          <div class="announce">
+            <h2 id="winner"></h2>
+            <p id="report"></p>
+            <p id="selection-text">Make a selection.</p>
+          </div>
+
+          <div class="buttons">
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">Scissors</button>
+          </div>
+          <button id="play-again">Play Again</button>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>&copy; 2025 miken studio. All rights reserved.</p>
+      </footer>
     </div>
   </body>
 </html>
